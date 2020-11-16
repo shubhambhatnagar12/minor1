@@ -145,29 +145,55 @@ void deleteFromHeap()
     //correcting the heap
     while(j<size)    
     {    
-        if(PQ[j+1].Hfunc<PQ[j].Hfunc)
+        if(size>2)
         {
-            j=j+1;
+            if(PQ[j+1].Hfunc<PQ[j].Hfunc)
+            {
+                j=j+1;
+            }
+
+            if(temp2.Hfunc>PQ[j].Hfunc)
+            {
+                PQ[i].vertex=PQ[j].vertex;
+                PQ[i].distance=PQ[j].distance;
+                PQ[i].via=PQ[j].via;
+                PQ[i].Hfunc=PQ[j].Hfunc;
+
+                i=j;
+                j=2*j+1;
+            }
+            else
+            {
+                PQ[i].vertex=temp2.vertex;
+                PQ[i].distance=temp2.distance;
+                PQ[i].via=temp2.via;
+                PQ[i].Hfunc=temp2.Hfunc;
+                return;
+            }
         }
 
-        if(temp2.Hfunc>PQ[j].Hfunc)
-        {
-            PQ[i].vertex=PQ[j].vertex;
-            PQ[i].distance=PQ[j].distance;
-            PQ[i].via=PQ[j].via;
-            PQ[i].Hfunc=PQ[j].Hfunc;
-
-            i=j;
-            j=2*j+1;
-        }
         else
         {
-            PQ[i].vertex=temp2.vertex;
-            PQ[i].distance=temp2.distance;
-            PQ[i].via=temp2.via;
-            PQ[i].Hfunc=temp2.Hfunc;
-            return;
+            if(temp2.Hfunc>PQ[j].Hfunc)
+            {
+                PQ[i].vertex=PQ[j].vertex;
+                PQ[i].distance=PQ[j].distance;
+                PQ[i].via=PQ[j].via;
+                PQ[i].Hfunc=PQ[j].Hfunc;
+
+                i=j;
+                j=2*j+1;
+            }
+            else
+            {
+                PQ[i].vertex=temp2.vertex;
+                PQ[i].distance=temp2.distance;
+                PQ[i].via=temp2.via;
+                PQ[i].Hfunc=temp2.Hfunc;
+                return;
+            }
         }
+        
     }
     
 }
@@ -211,8 +237,7 @@ void createHeap(int i)
 void createArrayForPQ(struct listofvertex parentnodeaddress,int numConn)
 {
     struct node *address;
-    int x,y;
-    y=x;
+    int x;
     x=size;
     size=size+numConn;
     PQ=(struct nodeForAStar *)realloc(PQ,size*sizeof(struct nodeForAStar));
