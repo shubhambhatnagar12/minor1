@@ -301,6 +301,24 @@ void Astar()
 
 }
 
+//fillgraph function
+void fillgraph(){
+	
+	int i;
+	
+    //entering info in the listofvertex and adding edges
+	for(i=1;i<=noVer;i++)
+	{
+		createEdge(i);
+	}
+
+    //printing graph
+	for(i=1;i<=noVer;i++)
+	{
+		displayConnection(i);
+	}
+}
+
 
 
 int main()
@@ -313,17 +331,8 @@ int main()
     //created listofvertex array of size noVer
     graph=(struct listofvertex *)calloc(noVer,sizeof(struct listofvertex));
 
-    //entering info in the listofvertex and adding edges
-    for(i=1;i<=noVer;i++)
-	{
-         createEdge(i);
-	}
-
-    //printing graph
-    for(i=1;i<=noVer;i++)
-	{
-		displayConnection(i);
-	}
+    //entering graph
+    fillgraph();
 
     //getting source vertex
     printf("enter Source vertex");
