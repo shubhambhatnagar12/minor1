@@ -10,7 +10,7 @@ In this project we're:
 		-> Travelling that shortest path
     
 		-> Making Dynamic changes
-         -> Adding Node
-         -> Changing Weight
+         		-> Adding Node
+         		-> Changing Weight
     
 		-> Calculating time taken to calcule the path
