@@ -29,7 +29,7 @@ struct listofvertex             //structure to represent vertices in a graph
     struct node *edges;
 };
 
-int noVer, algorithm, destination, size=1, knowhere=0;                                  //declaration of global variables
+int noVer, algorithm, destination, size=1, knowhere=0, knoweight=0;                                  //declaration of global variables
 struct listofvertex * graph;
 struct nodeForAStar * final,*formoving;
 struct nodeForAStar *PQ;
@@ -789,18 +789,11 @@ void BellmanFord(int source)
 	height(3);
 	distance(30);
 
-	if (algorithm==2)
-	{
-		dijkstra(source);
-		if (knowhere==0)
-		{
-			Astar(source);
-		}
-		else
-		{
-			AstarMain(source);
-		}
-
+	if (knoweight==1)
+	{	
+		height(2);
+		distance(30);
+		printf("NOTE: A-Star and DIJKSTRA are not able to calculate shortest path for NEGATIVE weight ACCURATELY. ");
 		height(2);
 		distance(30);
     	printf("Do you want to start traversing your shortest path? (1/0) \n");
@@ -816,10 +809,41 @@ void BellmanFord(int source)
 		else
 		{
 			exit(0);
-		}	
+		}
 	}
 	
+	else
+	{
+		if (algorithm==2)
+		{
+			dijkstra(source);
+			if (knowhere==0)
+			{
+				Astar(source);
+			}
+			else
+			{
+				AstarMain(source);
+			}
+
+			height(2);
+			distance(30);
+    		printf("Do you want to start traversing your shortest path? (1/0) \n");
+    		distance(30);
+    		printf("-->");
+			scanf("%d",&R1);
 	
+			if(R1==1)
+			{
+				system("cls");
+				traverse(source,parent);
+			}
+			else
+			{
+				exit(0);
+			}	
+		}
+	}
 	
 }
 
@@ -1281,7 +1305,12 @@ int main()
 
 	height(3);
 	distance(30);
-	
+	printf("Does the graph have a NEGATIVE weight ?  Press 1 if yes else 0 \n");
+	distance(30);
+	printf("-> ");
+	scanf("%d",&knoweight);
+	height(2);
+	distance(30);
 	printf("Number Of Vertex In The Graph = ?\n");
 	distance(30);
 	scanf("%d",&noVer);
@@ -1325,43 +1354,55 @@ int main()
     // giving option of algos
 	while (1)
 	{
-		height(3);
-		distance(72);
-		printf(" SELECT ALGORITHM TO FIND SHORTEST PATH ");
-		height(2);
-		distance(30);
-		printf(" PRESS 1 to find shortest path using DIJKSTRA \n");
-		height(2);
-		distance(30);
-    	printf(" PRESS 2 to find shortest path using BELLMAN FORD \n");
-		height(2);
-		distance(30);
-    	printf(" PRESS 3 to find shortest path using A-STAR \n");
-		height(2);
-		distance(30);
-		printf(" PRESS 4 to EXIT  \n");
-		height(2);
-		distance(30);
-		printf(" --> ");
-    	scanf("%d",&i);
-    	algorithm=i;
-    	//switch case
-    	switch (i)
-    	{
-        	case 1:dijkstra(source);
-					break;
-        	case 2:BellmanFord(source);
-                	break;
-        	case 3:Astar(source);
-            	    break;
+		if (knoweight==1)
+		{
+			BellmanFord(source);
+			exit(0);
+		}
+		
+		else
+		{
+			height(3);
+			distance(72);
+			printf(" SELECT ALGORITHM TO FIND SHORTEST PATH ");
+			height(2);
+			distance(30);
+			printf(" PRESS 1 to find shortest path using DIJKSTRA \n");
+			height(2);
+			distance(30);
+    		printf(" PRESS 2 to find shortest path using BELLMAN FORD \n");
+			height(2);
+			distance(30);
+    		printf(" PRESS 3 to find shortest path using A-STAR \n");
+			height(2);
+			distance(30);
+			printf(" PRESS 4 to EXIT  \n");
+			height(2);
+			distance(30);
+			printf(" --> ");
+    		scanf("%d",&i);
+    		algorithm=i;
+    		//switch case
+    		switch (i)
+    		{
+        		case 1:dijkstra(source);
+						break;
+        		case 2:BellmanFord(source);
+                		break;
+        		case 3:Astar(source);
+            	    	break;
 					
-			case 4:exit(0);
+				case 4:exit(0);
              
-        	default:height(2);
-					distance(30);
-					printf("INVALID CHOICE");
-                	break;
-   		}
+        		default:height(2);
+						distance(30);
+						printf("INVALID CHOICE");
+                		break;
+   			}
+		}
+		
+		
+		
 	}
 	
     return 0;
