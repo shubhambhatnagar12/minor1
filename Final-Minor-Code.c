@@ -197,6 +197,8 @@ void changeweight(int x, int y, int w)
 	}
 		
 	K->weight=w;
+	height(1);
+	distance(30);
 	printf("Edge weight Updated");
 }
 
@@ -281,14 +283,16 @@ void weightupdate()
 		printf("Enter the source vertex \n");
 		distance(30);
 		printf("-> ");
-		scanf("%d \n",&x);
+		scanf("%d",&x);
+		printf("\n");
 		distance(30);
 		printf("Enter the destination vertex \n ");
 		distance(30);
 		printf("-> ");
-		scanf("%d \n",&y);
+		scanf("%d",&y);
+		printf("\n");
 		distance(30);
-		printf("Enter the updated weight for edge %d to %d",x,y);
+		printf("Enter the updated weight for edge %d to %d\n",x,y);
 		distance(30);
 		printf("-> ");
 		scanf("%d",&w);
@@ -321,14 +325,10 @@ void Dynamicchange()
 	}
 	if(R3==1)
 	{
+		knowhere++;
 		weightupdate();
 		height(2);
-		for(int i=1;i<=noVer;i++)
-		{
-			distance(30);
-			displayConnection(i);
-			printf("\n");
-		}
+		
 	}
 	
 } 
