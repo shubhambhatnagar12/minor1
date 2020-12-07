@@ -14,3 +14,5 @@ In this project we're:
          		-> Changing Weight
     
 		-> Calculating time taken to calcule the path
+
+MAIN CODE IS IN Final-Minor-Code.c FILE
