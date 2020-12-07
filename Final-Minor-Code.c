@@ -761,6 +761,7 @@ void BellmanFord(int source)
 					height(2);
 					distance(30);
 					printf("Graph contains negative weight cycle");
+					exit(0);
 				}
 			}
 		}
